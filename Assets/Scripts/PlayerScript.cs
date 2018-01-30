@@ -15,13 +15,29 @@ public class PlayerScript : MonoBehaviour
 	public int player;
 	//private bool isDead = false;
 
+	private int score = 0;
+	public Text ScoreText;
+
+
 	// Use this for initialization
 	void Start () {
 		LivesText.text = health.ToString ();
+		score = 0;
+		ScoreText.text = score.ToString ();
+	
+
 	}
+
 
 	// Update is called once per frame
 	void Update () {
+
+		if (isJumping == true) {
+			score = Mathf.RoundToInt(Time.timeSinceLevelLoad);
+			ScoreText.text = score.ToString ();
+
+
+		}
 		if (GameManager.instance.isDead == true) {
 			var gameOver = FindObjectOfType<GameOverScript>();
 			gameOver.ShowButtons();
@@ -111,4 +127,6 @@ public class PlayerScript : MonoBehaviour
 
 		}
 	}
+
+
 }
